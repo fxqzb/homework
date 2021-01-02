@@ -478,8 +478,8 @@ def main():
         print('load checkpoint. epoch :', checkpoint['epoch'])
         model.load_state_dict(checkpoint['state_dict'])
 
-        header = ['corrupt', 'test_acc', 'brier', 'ece']
-        #header = ['corrupt', 'test_acc']
+        #header = ['corrupt', 'test_acc', 'brier', 'ece']
+        header = ['corrupt', 'test_acc']
 
         #Evaluate on OOD dataset (SVHN)
         ood_images_file = 'data/SVHN/svhn-test.npy'
@@ -487,10 +487,10 @@ def main():
         ood_images = ood_images[:10000, :, :, :]
         ood_labels = np.arange(len(ood_images)) + 10  #create dummy labels
         ood_loader = get_ood_dataloader(ood_images, ood_labels)
-        ood_acc, ood_brier, ood_ece = evaluate(model, ood_loader, corrupt='ood', level=None)
+        ood_acc = evaluate(model, ood_loader, corrupt='ood', level=None)
         print('******OOD data***********\n')
-        print('ood_acc: ', ood_acc, ' | Brier: ', ood_brier, ' | ECE: ', ood_ece, '\n')
-        #print('ood_acc: ', ood_acc)
+        #print('ood_acc: ', ood_acc, ' | Brier: ', ood_brier, ' | ECE: ', ood_ece, '\n')
+        print('ood_acc: ', ood_acc)
         '''
         o_file = args.log_dir + '/results/ood_results.csv'
         with open(o_file, 'wt') as o_file:
