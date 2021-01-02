@@ -16,7 +16,7 @@ import models.bayesian.resnet as resnet
 import models.deterministic.resnet as det_resnet
 import numpy as np
 from src import util
-#from utils import calib
+from torch.utils import calib
 import csv
 from src.util import get_rho
 from src.avuc_loss import AvULoss
